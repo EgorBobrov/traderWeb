@@ -73,6 +73,10 @@ document.getElementById("gunsStorage").innerHTML = myGuns;
 document.getElementById("gunsPrice").innerHTML = gunsPrice + '$';
 document.getElementById("gunPrice").innerHTML = gunsPrice + '$';
 
+window.alert("Welcome to Southern Market! That's the place where you can make a good profit." +  
+    " Just remember that every turn you have to pay 100$ of the rent costs and 13% of your money as a tax. " + 
+    "If you have negative amount of money at the end of a turn, you are a bancrupt which means game over! Good luck.");
+
 function tradeStuff(a) {
 	var tradeQuery; //= new query(0, 0, 0);
 	if (a == 1) {
@@ -218,7 +222,7 @@ function nextTurn() {
 
     var al = new alerts(slavesPrice, cottonPrice, gunsPrice);
     var tax = x * 0.13;
-    x = x - tax;
+    x = x - 100 - tax;
     document.getElementById("cash").innerHTML = x + '$';
 
 }
