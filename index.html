@@ -2,76 +2,93 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>TraderTradeWeb</title>
+    <title>Global Trader</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" media="screen" />
 </head>
 <body>
-    <h1>Welcome trader</h1>
-    <p>Available cash:</p>
-    <div id="cash"></div>
-    <br>
-    <button onclick='nextTurn()'>Next turn</button>
-    <br>
-    <br>
-    <table border="2px solid black">
-        <thead>Items on market: </thead>
-        <tr>
-            <td>Item name</td>
-            <td>Quantity</td>
-            <td>Price</td>
-            <td>Buy: </td>
+    
+    
+
+    <div class="tables">
+    <h1>Welcome to the Global Market!</h1>
+
+    <div id="marketAlerts">
+    </div>
+
+    <table class="myTable">
+        <caption>Goods on market: </caption>
+        <tr class="tableHead">
+            <th>Item name</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Buy: </th>
         </tr>
         <tr>
-            <td>Slaves</td>
-            <td id="slavesMarket">50</td>
-            <td id="slavesPrice">600$</td>
-            <td><input type="number" id="buySlaves" value="0"></td>
+            <td>Oil</td>
+            <td id="oilMarket">50</td>
+            <td id="oilPrice">600$</td>
+            <td><input type="number" id="buyoil" value="0"></td>
         </tr>
         <tr>
-            <td>Cotton</td>
-            <td id="cottonMarket">1000</td>
-            <td id="cottonPrice">30$</td>
-            <td><input type="number" id="buyCotton" value="0"></td>
+            <td>Coal</td>
+            <td id="coalMarket">1000</td>
+            <td id="coalPrice">30$</td>
+            <td><input type="number" id="buycoal" value="0"></td>
         </tr>
         <tr>
-            <td>Guns</td>
-            <td id="gunsMarket">400</td>
-            <td id="gunsPrice">50$</td>
-            <td><input type="number" id="buyGuns" value="0"></td>
+            <td>Metals</td>
+            <td id="metalsMarket">400</td>
+            <td id="metalsPrice">50$</td>
+            <td><input type="number" id="buymetals" value="0"></td>
+        </tr>
+        <tr class="buttonArea">
+            <td colspan="4">
+                <button onclick='tradeStuff(1)' class="button">Buy</button>
+            </td>
+        </tr>
+    </table>
+
+    <table class="myTable">
+        <caption>Goods in my storage: </caption>
+        <tr class="tableHead">
+            <th>Item name</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Sell: </th>
+        </tr>
+        <tr>
+            <td>Oil</td>
+            <td id="oilStorage"></td>
+            <td id="oiPrice"></td>
+            <td><input type="number" id="selloil" value="0"></td>
+        </tr>
+        <tr>
+            <td>Coal</td>
+            <td id="coalStorage"></td>
+            <td id="coaPrice"></td>
+            <td><input type="number" id="sellcoal" value="0"></td>
+        </tr>
+        <tr>
+            <td>Metals</td>
+            <td id="metalsStorage"></td>
+            <td id="metalPrice"></td>
+            <td><input type="number" id="sellmetals" value="0"></td>
+        </tr>
+        <tr class="buttonArea">
+            <td colspan="4" >
+                <button onclick='tradeStuff(-1)' class="button">Sell</button>            
+            </td>
         </tr>
 
     </table>
-    <button onclick='tradeStuff(1)'>Buy stuff</button>
-    <br>
-    <br>
-    <table border="2px solid black">
-        <thead>Items in your storage: </thead>
-        <tr>
-            <td>Item name</td>
-            <td>Quantity</td>
-            <td>Price</td>
-            <td>Sell: </td>
-        </tr>
-        <tr>
-            <td>Slaves</td>
-            <td id="slavesStorage"></td>
-            <td id="slavePrice"></td>
-            <td><input type="number" id="sellSlaves" value="0"></td>
-        </tr>
-        <tr>
-            <td>Cotton</td>
-            <td id="cottonStorage"></td>
-            <td id="cottoPrice"></td>
-            <td><input type="number" id="sellCotton" value="0"></td>
-        </tr>
-        <tr>
-            <td>Guns</td>
-            <td id="gunsStorage"></td>
-            <td id="gunPrice"></td>
-            <td><input type="number" id="sellGuns" value="0"></td>
-        </tr>
+   
+    <div class="myCash">Your money reserves:
+        <div id="cash"></div>
+        <br>
+        <button onclick='nextTurn()' class="turnButton">Finish for today</button>
+    </div>
 
-    </table>
-    <button onclick='tradeStuff(-1)'>Sell stuff</button>
+    </div>
 
     <script type="text/javascript" src="script.js"></script>
 </body>

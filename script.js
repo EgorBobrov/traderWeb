@@ -1,98 +1,101 @@
-function query (slaves, cotton, guns) {
-	this.slaves = slaves;
-	this.cotton = cotton;
-	this.guns = guns;
+function query (Oil, coal, metals) {
+	this.Oil = Oil;
+	this.coal = coal;
+	this.metals = metals;
 }
 
-function randMult(rand, slMul, cotMul, gunMul) {
+function randMult(rand, oilMul, coalMul, metalMul) {
     this.rand = Math.floor(Math.random() * 10);
-    this.slMul = 0.5 + Math.random();
-    this.cotMul = 0.5 + Math.random();
-    this.gunMul = 0.5 + Math.random();
+    this.oilMul = 0.5 + Math.random();
+    this.coalMul = 0.5 + Math.random();
+    this.metalMul = 0.5 + Math.random();
 }
 
 function alerts (sp, cp, gp) {
-    message = "Price fluctuations: ";
+    message += " Price fluctuations: ";
     noFluc = true;
-    if (sp > 1.2*(300000 / slaves)) {
-        message += "Slaves prices are rising. "
+    if (sp > 1.2*(300000 / Oil)) {
+        message += "Oil prices are rising. "
         noFluc = false;
     };
-    if (sp < 0.8*(300000 / slaves)) {
-        message += "Slaves prices are dropping. "
+    if (sp < 0.8*(300000 / Oil)) {
+        message += "Oil prices are dropping. "
         noFluc = false;
     };
-    if (cp > 1.2*(300000 / cotton)) {
-        message += "Cotton prices are rising. "
+    if (cp > 1.2*(300000 / coal)) {
+        message += "Coal prices are rising. "
         noFluc = false;
     };
-    if (cp < 0.8*(300000 / cotton)) {
-        message += "Cotton prices are dropping. "
+    if (cp < 0.8*(300000 / coal)) {
+        message += "Coal prices are dropping. "
         noFluc = false;
     };
 
-    if (gp > 1.2*(200000 / guns)) {
-        message += "Guns prices are rising. ";
+    if (gp > 1.2*(200000 / metals)) {
+        message += "Metals prices are rising. ";
         noFluc = false;
     };
-    if (gp < 0.8*(200000 / guns)) {
-        message += "Guns prices are dropping.";
+    if (gp < 0.8*(200000 / metals)) {
+        message += "Metals prices are dropping.";
         noFluc = false;
     };
     if(noFluc) {
         message += "Nothing significant.";
     };
 
-    window.alert(message);
+    return message;
 }
 
 var x = 1000;
+var message = "Market report: nothing significant.";
 document.getElementById("cash").innerHTML = x + '$';
 
-var slaves = 500;
-var mySlaves = 0;
-var slavesPrice = 300000 / slaves;
-document.getElementById("slavesMarket").innerHTML = slaves;
-document.getElementById("slavesStorage").innerHTML = mySlaves;
-document.getElementById("slavesPrice").innerHTML = slavesPrice + '$';
-document.getElementById("slavePrice").innerHTML = slavesPrice + '$';
+var Oil = 500;
+var myoil = 0;
+var oilPrice = 300000 / Oil;
+document.getElementById("oilMarket").innerHTML = Oil;
+document.getElementById("oilStorage").innerHTML = myoil;
+document.getElementById("oilPrice").innerHTML = oilPrice + '$';
+document.getElementById("oiPrice").innerHTML = oilPrice + '$';
 
-var cotton = 10000;
-var myCotton = 0;
-var cottonPrice = 300000 / cotton;
-document.getElementById("cottonMarket").innerHTML = cotton;
-document.getElementById("cottonStorage").innerHTML = myCotton;
-document.getElementById("cottonPrice").innerHTML = cottonPrice + '$';
-document.getElementById("cottoPrice").innerHTML = cottonPrice + '$';
+var coal = 10000;
+var mycoal = 0;
+var coalPrice = 300000 / coal;
+document.getElementById("coalMarket").innerHTML = coal;
+document.getElementById("coalStorage").innerHTML = mycoal;
+document.getElementById("coalPrice").innerHTML = coalPrice + '$';
+document.getElementById("coaPrice").innerHTML = coalPrice + '$';
 
-var guns = 4000;
-var myGuns = 0;
-var gunsPrice = 200000 / guns;
-document.getElementById("gunsMarket").innerHTML = guns;
-document.getElementById("gunsStorage").innerHTML = myGuns;
-document.getElementById("gunsPrice").innerHTML = gunsPrice + '$';
-document.getElementById("gunPrice").innerHTML = gunsPrice + '$';
+var metals = 4000;
+var mymetals = 0;
+var metalsPrice = 200000 / metals;
+document.getElementById("metalsMarket").innerHTML = metals;
+document.getElementById("metalsStorage").innerHTML = mymetals;
+document.getElementById("metalsPrice").innerHTML = metalsPrice + '$';
+document.getElementById("metalPrice").innerHTML = metalsPrice + '$';
 
-window.alert("Welcome to Southern Market! That's the place where you can make a good profit." +  
-    " Just remember that every turn you have to pay 100$ of the rent costs and 13% of your money as a tax. " + 
-    "If you have negative amount of money at the end of a turn, you are a bancrupt which means game over! Good luck.");
+document.getElementById("marketAlerts").innerHTML =  message;
+
+window.alert("Welcome to Global Market! That's the place where you can make a good profit." +  
+    " Just remember that every day you have to pay 100$ to the brockers and 13% of your money as a tax. " + 
+    "If you have negative amount of money at the end of the day, you are a bancrupt which means game over! Good luck.");
 
 function tradeStuff(a) {
 	var tradeQuery; //= new query(0, 0, 0);
 	if (a == 1) {
-		tradeQuery = new query(document.getElementById('buySlaves').value, document.getElementById('buyCotton').value, document.getElementById('buyGuns').value);
-        if (tradeQuery.slaves < 0 || tradeQuery.cotton < 0 || tradeQuery.guns < 0) {
+		tradeQuery = new query(document.getElementById('buyoil').value, document.getElementById('buycoal').value, document.getElementById('buymetals').value);
+        if (tradeQuery.Oil < 0 || tradeQuery.coal < 0 || tradeQuery.metals < 0) {
             window.alert("You can't buy negative amount of goods!");
             return;
         };
 
-        if (slaves >= tradeQuery.slaves && cotton >= tradeQuery.cotton && guns >= tradeQuery.guns) {
-            slaves = slaves - a*tradeQuery.slaves;
-            mySlaves = mySlaves -  a*-tradeQuery.slaves;
-            cotton = cotton - a*tradeQuery.cotton;
-            myCotton = myCotton - a*-tradeQuery.cotton;
-            guns = guns - a*tradeQuery.guns;
-            myGuns = myGuns - a*-tradeQuery.guns;
+        if (Oil >= tradeQuery.Oil && coal >= tradeQuery.coal && metals >= tradeQuery.metals) {
+            Oil = Oil - a*tradeQuery.Oil;
+            myoil = myoil -  a*-tradeQuery.Oil;
+            coal = coal - a*tradeQuery.coal;
+            mycoal = mycoal - a*-tradeQuery.coal;
+            metals = metals - a*tradeQuery.metals;
+            mymetals = mymetals - a*-tradeQuery.metals;
         }
 
         else {
@@ -102,19 +105,19 @@ function tradeStuff(a) {
         
 	}
 	else if (a == -1){
-		tradeQuery = new query(document.getElementById('sellSlaves').value, document.getElementById('sellCotton').value, document.getElementById('sellGuns').value);
-        if (tradeQuery.slaves < 0 || tradeQuery.cotton < 0 || tradeQuery.guns < 0) {
+		tradeQuery = new query(document.getElementById('selloil').value, document.getElementById('sellcoal').value, document.getElementById('sellmetals').value);
+        if (tradeQuery.Oil < 0 || tradeQuery.coal < 0 || tradeQuery.metals < 0) {
             window.alert("You can't sell negative amount of goods!");
             return;
         };
 
-        if (mySlaves >= tradeQuery.slaves && myCotton >= tradeQuery.cotton && myGuns >= tradeQuery.guns) {
-            slaves = slaves - a*tradeQuery.slaves;
-            mySlaves = mySlaves -  a*-tradeQuery.slaves;
-            cotton = cotton - a*tradeQuery.cotton;
-            myCotton = myCotton - a*-tradeQuery.cotton;
-            guns = guns - a*tradeQuery.guns;
-            myGuns = myGuns - a*-tradeQuery.guns;
+        if (myoil >= tradeQuery.Oil && mycoal >= tradeQuery.coal && mymetals >= tradeQuery.metals) {
+            Oil = Oil - a*tradeQuery.Oil;
+            myoil = myoil -  a*-tradeQuery.Oil;
+            coal = coal - a*tradeQuery.coal;
+            mycoal = mycoal - a*-tradeQuery.coal;
+            metals = metals - a*tradeQuery.metals;
+            mymetals = mymetals - a*-tradeQuery.metals;
         }
         else {
             window.alert ("You are trying to sell more goods than you have for sale!")
@@ -122,22 +125,29 @@ function tradeStuff(a) {
         };
 	}
     
-    document.getElementById("slavesMarket").innerHTML = slaves;
-    document.getElementById("cottonMarket").innerHTML = cotton;
-    document.getElementById("gunsMarket").innerHTML = guns;
+    document.getElementById("oilMarket").innerHTML = Oil;
+    document.getElementById("coalMarket").innerHTML = coal;
+    document.getElementById("metalsMarket").innerHTML = metals;
 
-    document.getElementById("slavesStorage").innerHTML = mySlaves;
-    document.getElementById("cottonStorage").innerHTML = myCotton;
-    document.getElementById("gunsStorage").innerHTML = myGuns;
+    document.getElementById("oilStorage").innerHTML = myoil;
+    document.getElementById("coalStorage").innerHTML = mycoal;
+    document.getElementById("metalsStorage").innerHTML = mymetals;
 
-    x = x - a*(tradeQuery.slaves * slavesPrice + tradeQuery.cotton * cottonPrice + tradeQuery.guns * gunsPrice);
-    document.getElementById("cash").innerHTML = x + '$';
+    x = x - a*(tradeQuery.Oil * oilPrice + tradeQuery.coal * coalPrice + tradeQuery.metals * metalsPrice);
+    document.getElementById("cash").innerHTML = (Math.round(x * 100)/100).toFixed(2) + '$';
 
 }
 
 function nextTurn() {
     if (x < 0) {
         window.alert("You are a bancrupt!");
+        document.getElementById("selloil").value = 0;
+        document.getElementById("sellcoal").value = 0;
+        document.getElementById("sellmetals").value = 0;
+        document.getElementById("buyoil").value = 0;
+        document.getElementById("buycoal").value = 0;
+        document.getElementById("buymetals").value = 0;
+
         location.reload();
     };
 
@@ -146,84 +156,91 @@ function nextTurn() {
     switch(random.rand) {
         case 0:
         case 1: 
-            slaves = slaves + Math.floor(Math.random() * 50);
-            slavesPrice = (300000 / slaves)*random.slMul;
-            document.getElementById("slavesPrice").innerHTML = slavesPrice + '$';
-            document.getElementById("slavePrice").innerHTML = slavesPrice + '$';
-            document.getElementById("slavesMarket").innerHTML = slaves;
-            window.alert("Slaves supply is abundant this week. Cotton and gun industry are not doing so well.");
+            Oil = Oil + Math.floor(Math.random() * 50);
+            oilPrice = Math.round((300000 / Oil)*random.oilMul*100)/100;
+            document.getElementById("oilPrice").innerHTML = oilPrice + '$';
+            document.getElementById("oiPrice").innerHTML = oilPrice + '$';
+            document.getElementById("oilMarket").innerHTML = Oil;
+            message = "Market report: Oil supply is abundant. Coal and Metal industries are not doing so well.";
             break;
 
         case 2:
         case 3:
-            cotton = cotton + Math.floor(Math.random() * 300);
-            cottonPrice = (300000 / cotton)*random.cotMul;
-            document.getElementById("cottonPrice").innerHTML = cottonPrice + '$';
-            document.getElementById("cottoPrice").innerHTML = cottonPrice + '$';
-            document.getElementById("cottonMarket").innerHTML = cotton;
+            coal = coal + Math.floor(Math.random() * 300);
+            coalPrice = Math.round((300000 / coal)*random.coalMul*100)/100;
+            document.getElementById("coalPrice").innerHTML = coalPrice + '$';
+            document.getElementById("coaPrice").innerHTML = coalPrice + '$';
+            document.getElementById("coalMarket").innerHTML = coal;
 
-            window.alert("Cotton supply is abundant this week. Slaves and gun industry are not doing so well.");
+            message = "Market report: Coal supply is abundant. Oil and Metal industries are not doing so well.";
             break;
 
         case 4:
         case 5:
-            guns = guns + Math.floor(Math.random() * 200);
-            gunsPrice = (200000 / guns)*random.gunMul;
-            document.getElementById("gunsPrice").innerHTML = gunsPrice + '$';
-            document.getElementById("gunPrice").innerHTML = gunsPrice + '$';
-            document.getElementById("gunsMarket").innerHTML = guns;
+            metals = metals + Math.floor(Math.random() * 200);
+            metalsPrice = Math.round((200000 / metals)*random.metalMul*100)/100;
+            document.getElementById("metalsPrice").innerHTML = metalsPrice + '$';
+            document.getElementById("metalPrice").innerHTML = metalsPrice + '$';
+            document.getElementById("metalsMarket").innerHTML = metals;
 
-            window.alert("Guns supply is abundant this week. Cotton and slaves industry are not doing so well.");
+            message = "Market report: Metals supply is abundant. Coal and Oil industries are not doing so well.";
 
             break;
 
         case 6:
         case 7:
-            slaves = slaves + Math.floor(Math.random() * 30);
-            cotton = cotton + Math.floor(Math.random() * 300);
-            guns = guns + Math.floor(Math.random() * 150);
-            slavesPrice = (300000 / slaves)*random.slMul;
-            cottonPrice = (300000 / cotton)*random.cotMul;
-            gunsPrice = (200000 / guns)*random.gunMul;
-            document.getElementById("slavesPrice").innerHTML = slavesPrice + '$';
-            document.getElementById("slavePrice").innerHTML = slavesPrice + '$';
-            document.getElementById("cottonPrice").innerHTML = cottonPrice + '$';
-            document.getElementById("cottoPrice").innerHTML = cottonPrice + '$';
-            document.getElementById("gunsPrice").innerHTML = gunsPrice + '$';
-            document.getElementById("gunPrice").innerHTML = gunsPrice + '$';
-            document.getElementById("gunsMarket").innerHTML = guns;
-            document.getElementById("cottonMarket").innerHTML = cotton;
-            document.getElementById("slavesMarket").innerHTML = slaves;
-            window.alert("Supply of all types of goods grows steadily.");
+            Oil = Oil + Math.floor(Math.random() * 30);
+            coal = coal + Math.floor(Math.random() * 300);
+            metals = metals + Math.floor(Math.random() * 150);
+            oilPrice = Math.round((300000 / Oil)*random.oilMul*100)/100;
+            coalPrice = Math.round((300000 / coal)*random.coalMul*100)/100;
+            metalsPrice = Math.round((200000 / metals)*random.metalMul*100)/100;
+            document.getElementById("oilPrice").innerHTML = oilPrice + '$';
+            document.getElementById("oiPrice").innerHTML = oilPrice + '$';
+            document.getElementById("coalPrice").innerHTML = coalPrice + '$';
+            document.getElementById("coaPrice").innerHTML = coalPrice + '$';
+            document.getElementById("metalsPrice").innerHTML = metalsPrice + '$';
+            document.getElementById("metalPrice").innerHTML = metalsPrice + '$';
+            document.getElementById("metalsMarket").innerHTML = metals;
+            document.getElementById("coalMarket").innerHTML = coal;
+            document.getElementById("oilMarket").innerHTML = Oil;
+            message = "Market report: Supply of all types of goods grows steadily.";
             break;
 
 
         case 8:
         case 9:
-            slaves = slaves - Math.floor(Math.random() * 30);
-            cotton = cotton - Math.floor(Math.random() * 300);
-            guns = guns - Math.floor(Math.random() * 150);
-            slavesPrice = (300000 / slaves)*random.slMul;
-            cottonPrice = (300000 / cotton)*random.cotMul;
-            gunsPrice = (200000 / guns)*random.gunMul;
-            document.getElementById("slavesPrice").innerHTML = slavesPrice + '$';
-            document.getElementById("slavePrice").innerHTML = slavesPrice + '$';
-            document.getElementById("cottonPrice").innerHTML = cottonPrice + '$';
-            document.getElementById("cottoPrice").innerHTML = cottonPrice + '$';
-            document.getElementById("gunsPrice").innerHTML = gunsPrice + '$';
-            document.getElementById("gunPrice").innerHTML = gunsPrice + '$';
-            document.getElementById("gunsMarket").innerHTML = guns;
-            document.getElementById("cottonMarket").innerHTML = cotton;
-            document.getElementById("slavesMarket").innerHTML = slaves;
+            Oil = Oil - Math.floor(Math.random() * 30);
+            coal = coal - Math.floor(Math.random() * 300);
+            metals = metals - Math.floor(Math.random() * 150);
+            oilPrice = Math.round((300000 / Oil)*random.oilMul*100)/100;
+            coalPrice = Math.round((300000 / coal)*random.coalMul*100)/100;
+            metalsPrice = Math.round((200000 / metals)*random.metalMul*100)/100;
+            document.getElementById("oilPrice").innerHTML = oilPrice + '$';
+            document.getElementById("oiPrice").innerHTML = oilPrice + '$';
+            document.getElementById("coalPrice").innerHTML = coalPrice + '$';
+            document.getElementById("coaPrice").innerHTML = coalPrice + '$';
+            document.getElementById("metalsPrice").innerHTML = metalsPrice + '$';
+            document.getElementById("metalPrice").innerHTML = metalsPrice + '$';
+            document.getElementById("metalsMarket").innerHTML = metals;
+            document.getElementById("coalMarket").innerHTML = coal;
+            document.getElementById("oilMarket").innerHTML = Oil;
 
-            window.alert("Supply of all types of goods drops.");
+            message = "Market report: Supply of all types of goods drops.";
             break;
     }
 
-    var al = new alerts(slavesPrice, cottonPrice, gunsPrice);
+    document.getElementById("marketAlerts").innerHTML = alerts(oilPrice, coalPrice, metalsPrice);
+
     var tax = x * 0.13;
     x = x - 100 - tax;
-    document.getElementById("cash").innerHTML = x + '$';
+    document.getElementById("cash").innerHTML = (Math.round(x * 100)/100).toFixed(2) + '$';
+    document.getElementById("selloil").value = 0;
+    document.getElementById("sellcoal").value = 0;
+    document.getElementById("sellmetals").value = 0;
+    document.getElementById("buyoil").value = 0;
+    document.getElementById("buycoal").value = 0;
+    document.getElementById("buymetals").value = 0;
 
 }
 
